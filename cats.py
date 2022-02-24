@@ -26,7 +26,7 @@ def choose(paragraphs, select, k):
     >>> choose(ps, s, 1)
     'fine'
     >>> choose(ps, s, 2)
-    '' l = 3 k = 4
+    '' 
     """
     # BEGIN PROBLEM 1
     shorter = list(filter(select, paragraphs))
@@ -53,8 +53,8 @@ def about(topic):
     # BEGIN PROBLEM 2
     "*** YOUR CODE HERE ***"
     def select(p):
-        for word in topic:
-            if word in lower(p) and ' ' in lower(p):
+        for word in remove_punctuation(lower(p)).split(' '):
+            if word in topic:
                 return True
         return False
     return select
@@ -88,6 +88,12 @@ def accuracy(typed, reference):
     reference_words = split(reference)
     # BEGIN PROBLEM 3
     "*** YOUR CODE HERE ***"
+    correct = 0
+    for i in range(len(typed_words)):
+        if i < len(typed_words) and typed_words[i] == reference_words[i]:
+            correct += 1
+    return 
+
     # END PROBLEM 3
 
 
