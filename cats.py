@@ -98,7 +98,6 @@ def accuracy(typed, reference):
         if (i < len(typed_words) and i < len(reference_words)) and typed_words[i] == reference_words[i]:
             correct += 1
     return correct / len(typed_words)*100
-
     # END PROBLEM 3
 
 
@@ -117,6 +116,12 @@ def wpm(typed, elapsed):
     assert elapsed > 0, 'Elapsed time must be positive'
     # BEGIN PROBLEM 4
     "*** YOUR CODE HERE ***"
+    '''mins = elapsed / 60
+    length = 0
+    for word in typed.split(' '):
+        length += len(word)'''
+    return len(typed)/5 *  (60/elapsed)
+    
     # END PROBLEM 4
 
 
