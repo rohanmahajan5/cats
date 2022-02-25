@@ -1,5 +1,6 @@
 """Typing test implementation"""
 
+from numpy import diff
 from utils import lower, split, remove_punctuation, lines_from_file
 from ucb import main, interact, trace
 from datetime import datetime
@@ -98,7 +99,6 @@ def accuracy(typed, reference):
         if (i < len(typed_words) and i < len(reference_words)) and typed_words[i] == reference_words[i]:
             correct += 1
     return correct / len(typed_words)*100
-
     # END PROBLEM 3
 
 
@@ -117,8 +117,12 @@ def wpm(typed, elapsed):
     assert elapsed > 0, 'Elapsed time must be positive'
     # BEGIN PROBLEM 4
     "*** YOUR CODE HERE ***"
-
-    length = len(split(typed))
+    '''mins = elapsed / 60
+    length = 0
+    for word in typed.split(' '):
+        length += len(word)'''
+    return len(typed)/5 *  (60/elapsed)
+    
     # END PROBLEM 4
 
 
@@ -146,6 +150,22 @@ def autocorrect(typed_word, word_list, diff_function, limit):
     """
     # BEGIN PROBLEM 5
     "*** YOUR CODE HERE ***"
+
+    diffs = [diff_function(typed_word, word, limit) for word in word_list]
+    min_diff = min(diffs)
+    if min_diff <= limit:
+        min_diff_word_list = []
+        for i in range(len(word_list)):
+            if diff_function(typed_word, word_list[i], limit) == min_diff:
+                min_diff_word_list.append(word_list[i])
+        if typed_word in min_diff_word_list:
+            return typed_word
+        else:
+            return min_diff_word_list[0]
+
+    else:
+        return typed_word
+
     # END PROBLEM 5
 
 
