@@ -3,7 +3,7 @@
 from utils import lower, split, remove_punctuation, lines_from_file
 from ucb import main, interact, trace
 from datetime import datetime
-
+import math
 
 ###########
 # Phase 1 #
@@ -116,10 +116,6 @@ def wpm(typed, elapsed):
     assert elapsed > 0, 'Elapsed time must be positive'
     # BEGIN PROBLEM 4
     "*** YOUR CODE HERE ***"
-    '''mins = elapsed / 60
-    length = 0
-    for word in typed.split(' '):
-        length += len(word)'''
     return len(typed)/5 *  (60/elapsed)
     
     # END PROBLEM 4
