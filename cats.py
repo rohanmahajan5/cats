@@ -26,7 +26,7 @@ def choose(paragraphs, select, k):
     >>> choose(ps, s, 1)
     'fine'
     >>> choose(ps, s, 2)
-    '' l = 3 k = 4
+    '' 
     """
     # BEGIN PROBLEM 1
     shorter = list(filter(select, paragraphs))
@@ -53,8 +53,8 @@ def about(topic):
     # BEGIN PROBLEM 2
     "*** YOUR CODE HERE ***"
     def select(p):
-        for word in topic:
-            if word in lower(p) and ' ' in lower(p):
+        for word in remove_punctuation(lower(p)).split(' '):
+            if word in topic:
                 return True
         return False
     return select
@@ -88,22 +88,16 @@ def accuracy(typed, reference):
     reference_words = split(reference)
     # BEGIN PROBLEM 3
     "*** YOUR CODE HERE ***"
-
-    counter = 0
-    if not len(typed_words) == 0:   
-        for i in len(typed_words):
-            if i <= len(reference_words):
-                if typed_words[i] == reference_words[i]:
-                    counter += 1
-        
-        return counter/len(typed_words)
-
-    else:
-        if len(reference_words) == 0:
-            return 1
+    correct = 0
+    if len(typed_words) == 0:
+        if typed_words == reference_words:
+            return 100.0
         else:
-            return 0
-
+            return 0.0
+    for i in range(len(typed_words)):
+        if (i < len(typed_words) and i < len(reference_words)) and typed_words[i] == reference_words[i]:
+            correct += 1
+    return correct / len(typed_words)*100
 
     # END PROBLEM 3
 
@@ -123,6 +117,8 @@ def wpm(typed, elapsed):
     assert elapsed > 0, 'Elapsed time must be positive'
     # BEGIN PROBLEM 4
     "*** YOUR CODE HERE ***"
+
+    length = len(split(typed))
     # END PROBLEM 4
 
 
