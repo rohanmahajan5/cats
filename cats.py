@@ -1,6 +1,6 @@
 """Typing test implementation"""
 
-from numpy import diff
+#from numpy import diff
 from utils import lower, split, remove_punctuation, lines_from_file
 from ucb import main, interact, trace
 from datetime import datetime
@@ -188,7 +188,27 @@ def sphinx_swaps(start, goal, limit):
     5
     """
     # BEGIN PROBLEM 6
-    assert False, 'Remove this line'
+    '''length_diff = 0
+    if len(start) > len(goal):
+        counter += len(start)-len(goal)
+        start = start[0:len(goal)]
+    elif len(goal) > len(start):
+        length_diff += len(goal)-len(start)
+        goal = goal[0:len(start)]
+    char_diff = 0
+    for i in range(len(start)):
+        if start[i] != goal[i]:
+            char_diff += 1
+    return length_diff + char_diff if char_diff < limit else length_diff + limit'''
+    if start == goal:
+        return 0
+    elif min(len(start), len(goal)) == 0:
+        return max(len(start), len(goal))
+    elif limit == 0:
+        return limit+1
+    else:
+        add = 1 if (start[0] != goal[0]) else 0
+        return add + sphinx_swaps(start[1:], goal[1:], limit-add)
     # END PROBLEM 6
 
 
