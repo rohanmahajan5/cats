@@ -209,24 +209,23 @@ def minimum_mewtations(start, goal, limit):
     >>> minimum_mewtations("ckiteus", "kittens", big_limit) # ckiteus -> kiteus -> kitteus -> kittens
     3
     """
-    assert False, 'Remove this line'
+    # We're going to use recursion for this problem.
+    # If one of the words is empty, then just return the length of the longer one
+    if start == goal:
+        return 0
 
-    if ______________:  # Fill in the condition
-        # BEGIN
-        "*** YOUR CODE HERE ***"
-        # END
+    if min(len(start),len(goal)) == 0:
+        return max(len(start),len(goal))
 
-    elif ___________:  # Feel free to remove or add additional cases
-        # BEGIN
-        "*** YOUR CODE HERE ***"
-        # END
+    if limit == 0:
+        return 0
 
     else:
-        add = ...  # Fill in these lines
+        add = ...
         remove = ...
         substitute = ...
         # BEGIN
-        "*** YOUR CODE HERE ***"
+
         # END
 
 
