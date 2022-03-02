@@ -1,6 +1,6 @@
 """Typing test implementation"""
 
-from numpy import diff
+#from numpy import diff
 from utils import lower, split, remove_punctuation, lines_from_file
 from ucb import main, interact, trace
 from datetime import datetime
@@ -188,7 +188,15 @@ def sphinx_swaps(start, goal, limit):
     5
     """
     # BEGIN PROBLEM 6
-    assert False, 'Remove this line'
+    if start == goal:
+        return 0
+    elif min(len(start), len(goal)) == 0:
+        return max(len(start), len(goal))
+    elif limit == 0:
+        return limit+1
+    else:
+        add = 1 if (start[0] != goal[0]) else 0
+        return add + sphinx_swaps(start[1:], goal[1:], limit-add)
     # END PROBLEM 6
 
 
@@ -209,25 +217,22 @@ def minimum_mewtations(start, goal, limit):
     >>> minimum_mewtations("ckiteus", "kittens", big_limit) # ckiteus -> kiteus -> kitteus -> kittens
     3
     """
-    # We're going to use recursion for this problem.
-    # If one of the words is empty, then just return the length of the longer one
+
     if start == goal:
         return 0
-
-    if min(len(start),len(goal)) == 0:
-        return max(len(start),len(goal))
-
-    if limit == 0:
-        return 0
-
+    elif min(len(start), len(goal)) == 0:
+        return max(len(start), len(goal))
+    elif limit == 0:
+        return limit+1
     else:
-        add = ...
-        remove = ...
-        substitute = ...
-        # BEGIN
-
-        # END
-
+        if start[0] == goal[0]:
+            return minimum_mewtations(start[1:], goal[1:], limit)
+        else:
+            return min(
+                1+minimum_mewtations(start, goal[1:],limit-1), #add
+                1+minimum_mewtations(start[1:], goal, limit-1), #remove
+                1+minimum_mewtations(start[1:], goal[1:], limit-1) #substitute
+            )
 
 def final_diff(start, goal, limit):
     """A diff function that takes in a string START, a string GOAL, and a number LIMIT.
