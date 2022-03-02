@@ -188,18 +188,6 @@ def sphinx_swaps(start, goal, limit):
     5
     """
     # BEGIN PROBLEM 6
-    '''length_diff = 0
-    if len(start) > len(goal):
-        counter += len(start)-len(goal)
-        start = start[0:len(goal)]
-    elif len(goal) > len(start):
-        length_diff += len(goal)-len(start)
-        goal = goal[0:len(start)]
-    char_diff = 0
-    for i in range(len(start)):
-        if start[i] != goal[i]:
-            char_diff += 1
-    return length_diff + char_diff if char_diff < limit else length_diff + limit'''
     if start == goal:
         return 0
     elif min(len(start), len(goal)) == 0:
@@ -229,26 +217,22 @@ def minimum_mewtations(start, goal, limit):
     >>> minimum_mewtations("ckiteus", "kittens", big_limit) # ckiteus -> kiteus -> kitteus -> kittens
     3
     """
-    assert False, 'Remove this line'
 
-    if ______________:  # Fill in the condition
-        # BEGIN
-        "*** YOUR CODE HERE ***"
-        # END
-
-    elif ___________:  # Feel free to remove or add additional cases
-        # BEGIN
-        "*** YOUR CODE HERE ***"
-        # END
-
+    if start == goal:
+        return 0
+    elif min(len(start), len(goal)) == 0:
+        return max(len(start), len(goal))
+    elif limit == 0:
+        return limit+1
     else:
-        add = ...  # Fill in these lines
-        remove = ...
-        substitute = ...
-        # BEGIN
-        "*** YOUR CODE HERE ***"
-        # END
-
+        if start[0] == goal[0]:
+            return minimum_mewtations(start[1:], goal[1:], limit)
+        else:
+            return min(
+                1+minimum_mewtations(start, goal[1:],limit-1), #add
+                1+minimum_mewtations(start[1:], goal, limit-1), #remove
+                1+minimum_mewtations(start[1:], goal[1:], limit-1) #substitute
+            )
 
 def final_diff(start, goal, limit):
     """A diff function that takes in a string START, a string GOAL, and a number LIMIT.
