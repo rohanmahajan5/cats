@@ -1,3 +1,5 @@
+# Vincent Li and Rohan Mahajan
+
 """Typing test implementation"""
 
 #from numpy import diff
