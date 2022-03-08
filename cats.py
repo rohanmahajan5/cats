@@ -1,4 +1,10 @@
+<<<<<<< HEAD
+# ROHAN AND VINCENT
+=======
+# Vincent Li and Rohan Mahajan
+
 """Typing test implementation"""
+>>>>>>> 1e69e6bd1dad09679ea63fb8526603316635913c
 
 #from numpy import diff
 from utils import lower, split, remove_punctuation, lines_from_file
