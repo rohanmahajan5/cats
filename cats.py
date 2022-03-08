@@ -30,9 +30,9 @@ def choose(paragraphs, select, k):
     '' 
     """
     # BEGIN PROBLEM 1
-    shorter = list(filter(select, paragraphs))
+    shorter = list(filter(select, paragraphs)) # apply filter to all elements
     if k < len(shorter):
-        return shorter[k]
+        return shorter[k] # get kth index
     return ''
     # END PROBLEM 1
 
@@ -54,11 +54,11 @@ def about(topic):
     # BEGIN PROBLEM 2
     "*** YOUR CODE HERE ***"
     def select(p):
-        for word in remove_punctuation(lower(p)).split(' '):
+        for word in remove_punctuation(lower(p)).split(' '): #  split by word
             if word in topic:
                 return True
         return False
-    return select
+    return select # return the entire function
     # END PROBLEM 2
 
 
@@ -91,13 +91,13 @@ def accuracy(typed, reference):
     "*** YOUR CODE HERE ***"
     correct = 0
     if len(typed_words) == 0:
-        if typed_words == reference_words:
+        if typed_words == reference_words: # base cases
             return 100.0
         else:
             return 0.0
-    for i in range(len(typed_words)):
+    for i in range(len(typed_words)): 
         if (i < len(typed_words) and i < len(reference_words)) and typed_words[i] == reference_words[i]:
-            correct += 1
+            correct += 1 # count correct amount of words
     return correct / len(typed_words)*100
     # END PROBLEM 3
 
@@ -117,7 +117,7 @@ def wpm(typed, elapsed):
     assert elapsed > 0, 'Elapsed time must be positive'
     # BEGIN PROBLEM 4
     "*** YOUR CODE HERE ***"
-    return len(typed)/5 *  (60/elapsed)
+    return len(typed)/5 *  (60/elapsed) # (we got lucky with a guess, based on observing the data)
     
     # END PROBLEM 4
 
@@ -147,11 +147,11 @@ def autocorrect(typed_word, word_list, diff_function, limit):
     # BEGIN PROBLEM 5
     "*** YOUR CODE HERE ***"
 
-    diffs = [diff_function(typed_word, word, limit) for word in word_list]
-    min_diff = min(diffs)
+    diffs = [diff_function(typed_word, word, limit) for word in word_list] # list comprehension 
+    min_diff = min(diffs) # get the minimum
     if min_diff <= limit:
         min_diff_word_list = []
-        for i in range(len(word_list)):
+        for i in range(len(word_list)): # go through indices
             if diff_function(typed_word, word_list[i], limit) == min_diff:
                 min_diff_word_list.append(word_list[i])
         if typed_word in min_diff_word_list:
@@ -188,15 +188,15 @@ def sphinx_swaps(start, goal, limit):
     5
     """
     # BEGIN PROBLEM 6
-    if start == goal:
+    if start == goal: # base cases
         return 0
     elif min(len(start), len(goal)) == 0:
         return max(len(start), len(goal))
-    elif limit == 0:
+    elif limit == 0: # if you've run out of changes
         return limit+1
     else:
         add = 1 if (start[0] != goal[0]) else 0
-        return add + sphinx_swaps(start[1:], goal[1:], limit-add)
+        return add + sphinx_swaps(start[1:], goal[1:], limit-add) # call again with a shorter limit
     # END PROBLEM 6
 
 
@@ -218,17 +218,17 @@ def minimum_mewtations(start, goal, limit):
     3
     """
 
-    if start == goal:
+    if start == goal: # base cases
         return 0
     elif min(len(start), len(goal)) == 0:
         return max(len(start), len(goal))
-    elif limit == 0:
+    elif limit == 0: # if ran out of changes
         return limit+1
     else:
         if start[0] == goal[0]:
             return minimum_mewtations(start[1:], goal[1:], limit)
         else:
-            return min(
+            return min( # reduce the lengths of next words based on change being made -- creates a huge tree to return min value
                 1+minimum_mewtations(start, goal[1:],limit-1), #add
                 1+minimum_mewtations(start[1:], goal, limit-1), #remove
                 1+minimum_mewtations(start[1:], goal[1:], limit-1) #substitute
